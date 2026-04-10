@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body>
+<section class="header">
+    <div class="header-centered">
+        <h1>Unclassified Anomaly Report </h1>
+        <h3>project:{{project_name}}</h3>
+    </div>
+    <p>Number of Images analysed: {{total_images}} </p>
+    <p>Confidence threshold: {{threshold}}% </p>
+    <hr/>
+</section>
+<section id="anomalies">
+  <h2>Anomalous images</h2>
+  <div class="anomaly">
+    <h3>Block Artifact</h3>
+    <ul>
+        <li>
+            <p class="p-inline">{{anomaly_image}}</p>
+            <p class="p-inline">confidence: {{confidence}}%</p>
+        </li>
+    </ul>
+  </div>
+  <div class="anomaly">
+    <h3>Color Difference</h3>
+      <ul>
+          <li>
+              <p class="p-inline">{{anomaly_image}}</p>
+              <p class="p-inline">confidence:  {{confidence}}%</p>
+          </li>
+      </ul>
+  </div>
+  <div class="anomaly">
+    <h3>Water Mask</h3>
+      <ul>
+          <li>
+              <p class="p-inline">{{anomaly_image}}</p>
+              <p class="p-inline">confidence:  {{confidence}}%</p>
+          </li>
+      </ul>
+  </div>
+  <div class="anomaly">
+    <h3>Line Artifact</h3>
+      <ul>
+          <li>
+              <p class="p-inline">{{anomaly_image}}</p>
+              <p class="p-inline">confidence:  {{confidence}}%</p>
+          </li>
+      </ul>
+  </div>
+
+</section>
+</body>
+</html>
