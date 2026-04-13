@@ -1,3 +1,4 @@
+import os
 import sys
 import grpc
 import skavl_proto.report_pb2 as report_pb2
@@ -11,7 +12,7 @@ def run():
         project_metadata=anomaly_pb2.ProjectMetadata(
             project_name="NORDMØRE 2025 HX-14365",
             sosi_file_path="/data/nordmore.sos",
-            image_folder_path="/data/images",
+            image_folder_path=os.path.abspath(r"C:\Users\name\Skule\2026-vaar\IDATA2901-bachelor-thesis\testing-images"),
         ),
         anomaly_sets=[
             anomaly_pb2.AnomalySet(
@@ -36,7 +37,7 @@ def run():
     with grpc.insecure_channel(HOST) as channel:
         stub = report_pb2_grpc.ReportServiceStub(channel)
         try:
-            response = stub.GenerateReportUnclassified(request, timeout=10)
+            response = stub.GenerateReportClassified(request, timeout=10)
             print(f"Report URL: {response.report_url}")
         except grpc.RpcError as e:
             print(f"RPC error [{e.code()}]: {e.details()}", file=sys.stderr)

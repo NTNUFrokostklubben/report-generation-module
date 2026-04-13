@@ -18,7 +18,9 @@ def create_report_set(request: ReportGenerationRequest) -> ReportSet:
         anomaly_images.append(image_set)
 
     report_set = ReportSet(project_meta_data=metadata,
-                           anomaly_images=anomaly_images, confidence_threshold=request.confidence_threshold)
+                           anomaly_images=anomaly_images,
+                           confidence_threshold=request.confidence_threshold,
+                           locale=request.locale)
     return report_set
 
 

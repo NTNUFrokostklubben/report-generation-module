@@ -1,0 +1,19 @@
+body {
+      font-family: "Segoe UI", sans-serif;
+}
+@page {
+  size: A4;
+     @top-right {
+    content: counter(page);
+  }
+}
+
+.header-centered{
+    text-align: center;
+}
+.p-inline{
+    display: inline;
+}
+h2{
+    text-align: center;
+}
