@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 from weasyprint import HTML, CSS
@@ -10,8 +11,11 @@ def create_report_unclassified(report_set: ReportSet):
        :param report_set: the set of anomaly data to create a report based on.
        :return: the gRPC response from the report generator.
        """
+    _BASE_DIR = Path(sys.executable).parent if getattr(sys, 'frozen', False) else Path(__file__).parent.parent.parent
     _TEMPLATE_DIR = Path(__file__).parent.parent / "templates"
-    _REPORT_DIR = Path(__file__).parent.parent.parent / "reports"
+    _REPORT_DIR = _REPORT_DIR = _BASE_DIR / "reports"
+    _REPORT_DIR.mkdir(exist_ok=True)
+
 
     environment = Environment(loader=FileSystemLoader(str(_TEMPLATE_DIR)))
     report = environment.get_template("unclassified_report.html")
@@ -29,7 +33,7 @@ def create_report_unclassified(report_set: ReportSet):
     )
         , base_url=str(_TEMPLATE_DIR))
     css = CSS(str(_TEMPLATE_DIR / "unclassified_report.css"))
-    report_name = (report_set.project_meta_data.project_name.replace(" ", "-")+"-unclassified-report.pdf")
+    report_name = (report_set.project_meta_data.project_name.replace(" ", "_")+"_unclassified-report.pdf")
     html.write_pdf(_REPORT_DIR / report_name, stylesheets=[css])
 
     response = str(_REPORT_DIR / report_name)

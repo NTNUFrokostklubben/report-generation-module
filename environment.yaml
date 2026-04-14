@@ -1,0 +1,12 @@
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - jinja2
+  - weasyprint
+  - fontconfig
+  - pip
+  - pyinstaller
+  - pip:
+    - imagecodecs
+    - tifffile

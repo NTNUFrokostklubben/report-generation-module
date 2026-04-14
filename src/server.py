@@ -1,4 +1,5 @@
 from concurrent import futures
+from pathlib import Path
 
 import grpc
 import skavl_proto.report_pb2_grpc as rpg2
@@ -11,6 +12,7 @@ def serve():
     """
     Create and start gRPC server and serve it.
     """
+    Path("reports").mkdir(exist_ok=True)
 
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=4))
     rpg2.add_ReportServiceServicer_to_server(ReportServicer(), server)

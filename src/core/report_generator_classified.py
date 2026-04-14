@@ -1,3 +1,6 @@
+
+import sys
+
 import tempfile
 from pathlib import Path
 import skavl_proto.report_pb2 as rp2
@@ -15,9 +18,10 @@ def create_report_classified(report_set: ReportSet) -> str:
     :param report_set: the set of anomaly data to create a report based on.
     :return: the gRPC response from the report generator.
     """
-
+    _BASE_DIR = Path(sys.executable).parent if getattr(sys, 'frozen', False) else Path(__file__).parent.parent.parent
     _TEMPLATE_DIR = Path(__file__).parent.parent / "templates"
-    _REPORT_DIR = Path(__file__).parent.parent.parent / "reports"
+    _REPORT_DIR =  _REPORT_DIR = _BASE_DIR / "reports"
+    _REPORT_DIR.mkdir(exist_ok=True)
 
     environment = Environment(loader=FileSystemLoader(str(_TEMPLATE_DIR)))
     report = environment.get_template("classified_report.html")
