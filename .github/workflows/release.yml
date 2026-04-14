@@ -1,0 +1,69 @@
+#Linux build has been commented out for the time being as the sosi bundle only works on windows.
+#TODO: Implement SOSI bundling step for linux
+
+name: release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+  windows-build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Miniforge
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          miniforge-version: latest
+          activate-environment: base
+          auto-update-conda: true
+
+      - name: Install conda-lock
+        run: conda install -n base -c conda-forge conda-lock
+
+      - name: Create build environment
+        run: conda-lock install --prefix ${{ github.workspace }}/env
+
+      - name: Install local package
+        shell: pwsh
+        run: conda run --prefix ./env pip install -e .
+
+      - name: Build binary
+        shell: pwsh
+        run: conda run --prefix ./env pyinstaller server.spec
+
+      - name: Package artifact
+        run: Compress-Archive -Path dist/server -DestinationPath skavl-report-${env:GITHUB_REF_NAME}-windows.zip
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: skavl-report-windows
+          path: skavl-report-${{ github.ref_name }}-windows.zip
+
+  publish-release:
+    runs-on: ubuntu-latest
+    needs:
+#      - linux-build
+      - windows-build
+    permissions:
+      contents: write
+
+    steps:
+#      - name: Download Linux artifact
+#        uses: actions/download-artifact@v4
+#        with:
+#          name: skavl-report-linux
+
+      - name: Download Windows artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: skavl-report-windows
+
+      - name: Upload release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: skavl-report-${{ github.ref_name }}-windows.zip
