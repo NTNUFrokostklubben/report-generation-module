@@ -6,24 +6,24 @@ File for holding translations for the application. The translations are stored i
 
 common_translations = {
     "en": {
-        "project": "project",
+        "project": "Project",
         "confidence_threshold": "Confidence threshold",
         "anomalous_images": "Anomalous images",
         "block_artifact": "Block Artifact",
         "color_difference": "Color Difference",
         "water_mask": "Water Mask",
         "line_artifact": "Line Artifact",
-        "confidence": "confidence",
+        "confidence": "Confidence",
     },
     "no": {
-        "project": "prosjekt",
-        "confidence_threshold": "konfidensgrense",
+        "project": "Prosjekt",
+        "confidence_threshold": "Konfidensgrense",
         "anomalous_images": "Avvikende bilder",
         "block_artifact": "Blokkartefakt",
         "color_difference": "Fargeforskjell",
         "water_mask": "Vannmaske",
         "line_artifact": "Linjeartefakt",
-        "confidence": "konfidens",
+        "confidence": "Konfidens",
     },
 }
 
