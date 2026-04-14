@@ -8,6 +8,10 @@ from services.report_service.report_servicer import ReportServicer
 
 
 def serve():
+    """
+    Create and start gRPC server and serve it.
+    """
+
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=4))
     rpg2.add_ReportServiceServicer_to_server(ReportServicer(), server)
     server.add_insecure_port("0.0.0.0:50053")

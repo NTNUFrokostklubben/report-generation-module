@@ -1,6 +1,4 @@
 from pathlib import Path
-import skavl_proto.report_pb2 as rp2
-
 from jinja2 import Environment, FileSystemLoader
 from weasyprint import HTML, CSS
 from entity.report_generation_set import ReportSet
@@ -31,10 +29,9 @@ def create_report_unclassified(report_set: ReportSet):
     )
         , base_url=str(_TEMPLATE_DIR))
     css = CSS(str(_TEMPLATE_DIR / "unclassified_report.css"))
-    project_report = (report_set.project_meta_data.project_name.replace(" ", "-")+"-unclassified-report.pdf")
-    html.write_pdf(_REPORT_DIR / project_report, stylesheets=[css])
+    report_name = (report_set.project_meta_data.project_name.replace(" ", "-")+"-unclassified-report.pdf")
+    html.write_pdf(_REPORT_DIR / report_name, stylesheets=[css])
 
-    response = rp2.ReportGenerationResponse()
-    response.report_url = str(_REPORT_DIR / project_report)
+    response = str(_REPORT_DIR / report_name)
 
     return response

@@ -7,8 +7,8 @@ class AnalysisType(Enum):
     COLOR_AVERAGE, WATER_MASK, ARTIFACT
     """
 
-    COLOR_AVERAGE = 'color_avg'
-    WATER_MASK = 'water_mask'
-    ARTIFACT = 'artifact'
-    ARTIFACT_LINE = 'artifact_line'
+    COLOR_AVERAGE = 1
+    WATER_MASK = 2
+    ARTIFACT = 3
+    ARTIFACT_LINE = 3
 

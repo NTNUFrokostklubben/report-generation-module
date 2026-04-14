@@ -37,7 +37,7 @@ def run():
     with grpc.insecure_channel(HOST) as channel:
         stub = report_pb2_grpc.ReportServiceStub(channel)
         try:
-            response = stub.GenerateReportClassified(request, timeout=10)
+            response = stub.GenerateReportClassified(request, timeout=300)
             print(f"Report URL: {response.report_url}")
         except grpc.RpcError as e:
             print(f"RPC error [{e.code()}]: {e.details()}", file=sys.stderr)

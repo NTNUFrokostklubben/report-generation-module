@@ -1,3 +1,9 @@
+"""
+File for holding translations for the application. The translations are stored in dictionaries,
+ where the keys are the language codes (e.g. "en" for English, "no" for Norwegian)
+  and the values are dictionaries containing the translations for each key used in the application.
+"""
+
 common_translations = {
     "en": {
         "project": "project",
@@ -11,13 +17,13 @@ common_translations = {
     },
     "no": {
         "project": "prosjekt",
-        "confidence_threshold": "Konfiansegrense",
+        "confidence_threshold": "konfidensgrense",
         "anomalous_images": "Avvikende bilder",
         "block_artifact": "Blokkartefakt",
         "color_difference": "Fargeforskjell",
         "water_mask": "Vannmaske",
         "line_artifact": "Linjeartefakt",
-        "confidence": "konfianse",
+        "confidence": "konfidens",
     },
 }
 

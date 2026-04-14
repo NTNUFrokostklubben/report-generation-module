@@ -7,6 +7,10 @@ import skavl_proto.anomaly_pb2 as anomaly_pb2
 HOST = "localhost:50053"
 
 def run():
+    """
+    Test for unclassified anomaly report generation.
+
+    """
     request = report_pb2.ReportGenerationRequest(
         project_metadata=anomaly_pb2.ProjectMetadata(
             project_name="NORDMØRE 2025 HX-14365",

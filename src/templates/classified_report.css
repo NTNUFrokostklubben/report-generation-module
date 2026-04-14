@@ -17,3 +17,9 @@ body {
 h2{
     text-align: center;
 }
+
+ .image-container img {
+     /* this makes two images fit side by side. For more images replace with (1/n)*100, where n is number of images */
+      width: calc(50% - 8px);
+      height: auto;
+  }
