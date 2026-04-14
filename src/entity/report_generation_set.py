@@ -12,3 +12,4 @@ class ReportSet:
     project_meta_data: ProjectMetaData
     anomaly_images: list[AnomalySet]
     confidence_threshold: float
+    locale:str

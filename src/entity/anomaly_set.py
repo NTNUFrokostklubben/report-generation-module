@@ -1,4 +1,6 @@
+import pathlib
 from dataclasses import dataclass
+from typing import Optional
 
 from entity.enum.analysis_t import AnalysisType
 
@@ -20,3 +22,4 @@ class AnomalySet:
     line_number: int
     image_number: int
     tiff_coordinate: tuple[float, float]
+    image_uri: Optional[str]
