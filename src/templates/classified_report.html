@@ -1,0 +1,40 @@
+{% macro anomaly_section(anomaly, images) %}
+<div class="anomaly">
+    <h3>{{anomaly}}</h3>
+    {% for row in images | batch(2) %}
+    <div class="image-row">
+        {% for img in row%}
+            {% if img is not none %}
+            <div class="image-container">
+                <img src="{{img.image_uri}}" alt="anomaly"/>
+                <p >{{img.image_name}}</p>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% endmacro %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body>
+<section class="header">
+    <div class="header-centered">
+        <h1>{{t.title}} </h1>
+        <h3>{{t.project}}:{{meta.project_name}}</h3>
+    </div>
+    <p>{{t.num_images}}: {{total_images}} </p>
+    <p>{{t.confidence_threshold}}: {{threshold*100}}% </p>
+    <hr/>
+</section>
+<section id="anomalies">
+    <h2>{{t.anomalous_images}}</h2>
+    {{ anomaly_section(t.block_artifact, artifact_images) }}
+    {{ anomaly_section(t.color_difference, color_diff_images) }}
+    {{ anomaly_section(t.water_mask, water_mask_images) }}
+    {{ anomaly_section(t.line_artifact, line_artifact_images) }}
+</section>
+</body>
+</html>
