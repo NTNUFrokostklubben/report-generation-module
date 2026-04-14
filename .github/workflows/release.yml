@@ -8,6 +8,7 @@ on:
     tags:
       - "v*"
 
+jobs:
   windows-build:
     runs-on: windows-latest
 
