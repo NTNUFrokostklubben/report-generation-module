@@ -6,6 +6,7 @@ dependencies:
   - weasyprint
   - fontconfig
   - pip
+  - pyinstaller
   - pip:
     - imagecodecs
     - tifffile

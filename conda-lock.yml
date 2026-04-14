@@ -13,16 +13,16 @@
 version: 1
 metadata:
   content_hash:
-    win-64: 33a23e0434150bf2ce5bb416fda99e6a91c1abc4c08f98dcc445a2d6cc3662be
-    linux-64: cb076e9c6301fe16d87f4624565da584ee153889ce31ea82c63fbd882d6171dd
+    win-64: b14c1d8eb31b5926422f1bf235434aa4567054de7bb26b4a2372ec9403675b68
+    linux-64: f0aa8a0d846a18e41afe80dcbb5d7113764d1a911a37bdb364bb208659bd5f2b
   channels:
   - url: conda-forge
     used_env_vars: []
   - url: defaults
     used_env_vars: []
   platforms:
-  - win-64
   - linux-64
+  - win-64
   sources:
   - environment.yaml
 package:
@@ -50,6 +50,32 @@ package:
   hash:
     md5: 1626967b574d1784b578b52eaeb071e7
     sha256: 8a1cee28bd0ee7451ada1cd50b64720e57e17ff994fc62dd8329bef570d382e4
+  category: main
+  optional: false
+- name: altgraph
+  version: 0.17.5
+  manager: conda
+  platform: linux-64
+  dependencies:
+    python: '>=3.10'
+    setuptools: ''
+  url: https://conda.anaconda.org/conda-forge/noarch/altgraph-0.17.5-pyhd8ed1ab_0.conda
+  hash:
+    md5: 2e94b32027e584b15d17cd29306308e9
+    sha256: 71da91de7002924723f6b0984ba65357df3472ab5a3bfa1ea8aace2ee2cb548c
+  category: main
+  optional: false
+- name: altgraph
+  version: 0.17.5
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: '>=3.10'
+    setuptools: ''
+  url: https://conda.anaconda.org/conda-forge/noarch/altgraph-0.17.5-pyhd8ed1ab_0.conda
+  hash:
+    md5: 2e94b32027e584b15d17cd29306308e9
+    sha256: 71da91de7002924723f6b0984ba65357df3472ab5a3bfa1ea8aace2ee2cb548c
   category: main
   optional: false
 - name: brotli
@@ -519,6 +545,18 @@ package:
     sha256: 15011071ee56c216ffe276c8d734427f1f893f275ef733f728d13f610ed89e6e
   category: main
   optional: false
+- name: future
+  version: 1.0.0
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: '>=3.9'
+  url: https://conda.anaconda.org/conda-forge/noarch/future-1.0.0-pyhd8ed1ab_2.conda
+  hash:
+    md5: 1054c53c95d85e35b88143a3eda66373
+    sha256: 45dfd037889b7075c5eb46394f93172de0be0b1624c7f802dd3ecc94b814d8e0
+  category: main
+  optional: false
 - name: glib
   version: 2.86.4
   manager: conda
@@ -684,6 +722,32 @@ package:
   hash:
     md5: 0097b24800cb696915c3dbd1f5335d3f
     sha256: 1bda728d70a619731b278c859eda364146cb5b4b8c739a64da8128353d81d1c4
+  category: main
+  optional: false
+- name: importlib-metadata
+  version: 8.8.0
+  manager: conda
+  platform: linux-64
+  dependencies:
+    python: ''
+    zipp: '>=3.20'
+  url: https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-8.8.0-pyhcf101f3_0.conda
+  hash:
+    md5: 080594bf4493e6bae2607e65390c520a
+    sha256: 82ab2a0d91ca1e7e63ab6a4939356667ef683905dea631bc2121aa534d347b16
+  category: main
+  optional: false
+- name: importlib-metadata
+  version: 8.8.0
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: ''
+    zipp: '>=3.20'
+  url: https://conda.anaconda.org/conda-forge/noarch/importlib-metadata-8.8.0-pyhcf101f3_0.conda
+  hash:
+    md5: 080594bf4493e6bae2607e65390c520a
+    sha256: 82ab2a0d91ca1e7e63ab6a4939356667ef683905dea631bc2121aa534d347b16
   category: main
   optional: false
 - name: jinja2
@@ -1682,6 +1746,19 @@ package:
     sha256: 3e9e02174edf02cb4bcdd75668ad7b74b8061791a3bc8bdb8a52ae336761ba3e
   category: main
   optional: false
+- name: pefile
+  version: 2023.2.7
+  manager: conda
+  platform: win-64
+  dependencies:
+    future: ''
+    python: '>=3.6'
+  url: https://conda.anaconda.org/conda-forge/noarch/pefile-2023.2.7-pyhd8ed1ab_0.conda
+  hash:
+    md5: 0ed15c3f3065806423dc1c76918bb304
+    sha256: 136aff687229403bc8f8829ed0cf1ab30ad88f6bcd1dfc25e8b14b13344440f2
+  category: main
+  optional: false
 - name: pillow
   version: 12.2.0
   manager: conda
@@ -1860,6 +1937,80 @@ package:
     sha256: 5c1d87d08fab3149a324f77069bf69b3cbb7405547d4f4d40d4b83b50ab7e497
   category: main
   optional: false
+- name: pyinstaller
+  version: 6.19.0
+  manager: conda
+  platform: linux-64
+  dependencies:
+    __glibc: '>=2.17,<3.0.a0'
+    altgraph: ''
+    libgcc: '>=14'
+    libzlib: '>=1.3.1,<2.0a0'
+    packaging: '>=22.0'
+    pyinstaller-hooks-contrib: '>=2025.9'
+    python: '>=3.14,<3.15.0a0'
+    python_abi: 3.14.*
+    setuptools: '>=42.0.0'
+  url: https://conda.anaconda.org/conda-forge/linux-64/pyinstaller-6.19.0-py314hda92701_1.conda
+  hash:
+    md5: 70b93aec1cda4dc69fe895e99b6df989
+    sha256: 418fda8c27bab9e4a9312895c5ce3fe0bbe73e0cb9e3d9391a9bd138f95500e6
+  category: main
+  optional: false
+- name: pyinstaller
+  version: 6.19.0
+  manager: conda
+  platform: win-64
+  dependencies:
+    altgraph: ''
+    libzlib: '>=1.3.1,<2.0a0'
+    packaging: '>=22.0'
+    pefile: '>=2022.5.30,!=2024.8.26'
+    pyinstaller-hooks-contrib: '>=2025.9'
+    python: '>=3.14,<3.15.0a0'
+    python_abi: 3.14.*
+    pywin32: ''
+    pywin32-ctypes: '>=0.2.1'
+    setuptools: '>=42.0.0'
+    ucrt: '>=10.0.20348.0'
+    vc: '>=14.3,<15'
+    vc14_runtime: '>=14.44.35208'
+  url: https://conda.anaconda.org/conda-forge/win-64/pyinstaller-6.19.0-py314h05bb05a_1.conda
+  hash:
+    md5: 9ac865e40b13390533ff94b8611b6981
+    sha256: 0e757140d3c077beff938ffb0076933d3b79890ae940abb74ae0f2be1f3634c1
+  category: main
+  optional: false
+- name: pyinstaller-hooks-contrib
+  version: '2026.2'
+  manager: conda
+  platform: linux-64
+  dependencies:
+    importlib-metadata: '>=4.6'
+    packaging: '>=22.0'
+    python: '>=3.10'
+    setuptools: '>=42.0.0'
+  url: https://conda.anaconda.org/conda-forge/noarch/pyinstaller-hooks-contrib-2026.2-pyhd8ed1ab_0.conda
+  hash:
+    md5: 4a43d11d9e1a05bfe79697e9e8e7e8ec
+    sha256: def63b279fe40f90804569ee79ae91a265a1f80344090955ee309f00eb48123a
+  category: main
+  optional: false
+- name: pyinstaller-hooks-contrib
+  version: '2026.2'
+  manager: conda
+  platform: win-64
+  dependencies:
+    importlib-metadata: '>=4.6'
+    packaging: '>=22.0'
+    python: '>=3.10'
+    setuptools: '>=42.0.0'
+  url: https://conda.anaconda.org/conda-forge/noarch/pyinstaller-hooks-contrib-2026.2-pyhd8ed1ab_0.conda
+  hash:
+    md5: 4a43d11d9e1a05bfe79697e9e8e7e8ec
+    sha256: def63b279fe40f90804569ee79ae91a265a1f80344090955ee309f00eb48123a
+  category: main
+  optional: false
 - name: pyphen
   version: 0.17.2
   manager: conda
@@ -1961,6 +2112,35 @@ package:
     sha256: ad6d2e9ac39751cc0529dd1566a26751a0bf2542adb0c232533d32e176e21db5
   category: main
   optional: false
+- name: pywin32
+  version: '311'
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: ''
+    python_abi: 3.14.*
+    ucrt: '>=10.0.20348.0'
+    vc: '>=14.3,<15'
+    vc14_runtime: '>=14.44.35208'
+  url: https://conda.anaconda.org/conda-forge/win-64/pywin32-311-py314h8f8f202_1.conda
+  hash:
+    md5: 2d7b7ba21e8a8ced0eca553d4d53f773
+    sha256: 6918a8067f296f3c65d43e84558170c9e6c3f4dd735cfe041af41a7fdba7b171
+  category: main
+  optional: false
+- name: pywin32-ctypes
+  version: 0.2.3
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: '>=3.14,<3.15.0a0'
+    python_abi: 3.14.*
+  url: https://conda.anaconda.org/conda-forge/win-64/pywin32-ctypes-0.2.3-py314h86ab7b2_3.conda
+  hash:
+    md5: 2507b24a127696b044f441df16c5571c
+    sha256: 70b43b8d6ac68a524e4d9dd0caf98f6c052918c1b658ee80af9e0269e2bc3a2a
+  category: main
+  optional: false
 - name: readline
   version: '8.3'
   manager: conda
@@ -1973,6 +2153,30 @@ package:
   hash:
     md5: d7d95fc8287ea7bf33e0e7116d2b95ec
     sha256: 12ffde5a6f958e285aa22c191ca01bbd3d6e710aa852e00618fa6ddc59149002
+  category: main
+  optional: false
+- name: setuptools
+  version: 82.0.1
+  manager: conda
+  platform: linux-64
+  dependencies:
+    python: '>=3.10'
+  url: https://conda.anaconda.org/conda-forge/noarch/setuptools-82.0.1-pyh332efcf_0.conda
+  hash:
+    md5: 8e194e7b992f99a5015edbd4ebd38efd
+    sha256: 82088a6e4daa33329a30bc26dc19a98c7c1d3f05c0f73ce9845d4eab4924e9e1
+  category: main
+  optional: false
+- name: setuptools
+  version: 82.0.1
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: '>=3.10'
+  url: https://conda.anaconda.org/conda-forge/noarch/setuptools-82.0.1-pyh332efcf_0.conda
+  hash:
+    md5: 8e194e7b992f99a5015edbd4ebd38efd
+    sha256: 82088a6e4daa33329a30bc26dc19a98c7c1d3f05c0f73ce9845d4eab4924e9e1
   category: main
   optional: false
 - name: tinycss2
@@ -2346,6 +2550,30 @@ package:
   hash:
     md5: 96d57aba173e878a2089d5638016dc5e
     sha256: 044c7b3153c224c6cedd4484dd91b389d2d7fd9c776ad0f4a34f099b3389f4a1
+  category: main
+  optional: false
+- name: zipp
+  version: 3.23.1
+  manager: conda
+  platform: linux-64
+  dependencies:
+    python: ''
+  url: https://conda.anaconda.org/conda-forge/noarch/zipp-3.23.1-pyhcf101f3_0.conda
+  hash:
+    md5: e1c36c6121a7c9c76f2f148f1e83b983
+    sha256: 523616c0530d305d2216c2b4a8dfd3872628b60083255b89c5e0d8c42e738cca
+  category: main
+  optional: false
+- name: zipp
+  version: 3.23.1
+  manager: conda
+  platform: win-64
+  dependencies:
+    python: ''
+  url: https://conda.anaconda.org/conda-forge/noarch/zipp-3.23.1-pyhcf101f3_0.conda
+  hash:
+    md5: e1c36c6121a7c9c76f2f148f1e83b983
+    sha256: 523616c0530d305d2216c2b4a8dfd3872628b60083255b89c5e0d8c42e738cca
   category: main
   optional: false
 - name: zlib-ng
