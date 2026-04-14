@@ -37,7 +37,7 @@ jobs:
         run: conda run --prefix ./env pyinstaller server.spec
 
       - name: Package artifact
-        run: Compress-Archive -Path dist/server -DestinationPath skavl-report-${env:GITHUB_REF_NAME}-windows.zip
+        run: Compress-Archive -Path dist/report-server.exe -DestinationPath skavl-report-${env:GITHUB_REF_NAME}-windows.zip
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
