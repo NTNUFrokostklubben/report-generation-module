@@ -1,8 +1,7 @@
 
 import  skavl_proto.report_pb2_grpc as rpc2
 import skavl_proto.report_pb2 as rp2
-from core import create_report_unclassified
-from core.report_generator_classified import create_report_classified
+from core.report_generator import ReportGenerator
 from entity import anomaly_set
 from entity.anomaly_set import AnomalySet
 from entity.project_meta_data import ProjectMetaData
@@ -47,6 +46,9 @@ class ReportServicer(rpc2.ReportServiceServicer):
     Represents a service for creating reports.
     Contains the gRPC methods for creating both classified and unclassified reports.
     """
+    _report_gen = None
+    def __init__(self):
+        self._report_gen = ReportGenerator()
 
     def GenerateReportUnclassified(self, request:ReportGenerationRequest, context)->ReportGenerationResponse:
         """
@@ -58,9 +60,10 @@ class ReportServicer(rpc2.ReportServiceServicer):
         :param context: the RPC context, contains standard rpc methods.
         :return:
         """
+
         report_set = create_report_set(request)
         response = rp2.ReportGenerationResponse()
-        response.report_url = create_report_unclassified(report_set)
+        response.report_url = self._report_gen.create_report_unclassified(report_set)
         return response
 
     def GenerateReportClassified(self, request:ReportGenerationRequest, context)->ReportGenerationResponse:
@@ -74,5 +77,5 @@ class ReportServicer(rpc2.ReportServiceServicer):
         """
         report_set = create_report_set(request)
         response = rp2.ReportGenerationResponse()
-        response.report_url = create_report_classified(report_set)
+        response.report_url = self._report_gen.create_report_classified(report_set)
         return response
