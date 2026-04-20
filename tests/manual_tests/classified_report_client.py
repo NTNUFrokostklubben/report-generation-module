@@ -21,6 +21,7 @@ def run():
                 anomaly_type=anomaly_pb2.AnomalyTypes.COLOR_AVERAGE,
                 line_number=73,
                 image_number=14822,
+                user_classification="test",
             ),
             anomaly_pb2.AnomalySet(
                 image_name="HX-14365_073_002_14823",
@@ -28,6 +29,7 @@ def run():
                 anomaly_type=anomaly_pb2.AnomalyTypes.ARTIFACT,
                 line_number=73,
                 image_number=14823,
+                user_classification="test2",
             )
         ],
         confidence_threshold=0.5,

@@ -3,6 +3,7 @@ import  skavl_proto.report_pb2_grpc as rpc2
 import skavl_proto.report_pb2 as rp2
 from core import create_report_unclassified
 from core.report_generator_classified import create_report_classified
+from entity import anomaly_set
 from entity.anomaly_set import AnomalySet
 from entity.project_meta_data import ProjectMetaData
 from entity.report_generation_set import ReportSet
@@ -30,7 +31,8 @@ def create_report_set(request: ReportGenerationRequest) -> ReportSet:
             line_number=image_set.line_number,
             image_number=image_set.image_number,
             tiff_coordinate=(image_set.geotiff_coordinate.easting, image_set.geotiff_coordinate.northing),
-            image_uri=None
+            image_uri=None,
+            user_classification=image_set.user_classification if image_set.HasField("user_classification") else None,
         ))
 
     report_set = ReportSet(project_meta_data=metadata,
