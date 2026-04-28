@@ -13,7 +13,6 @@ def serve():
     Create and start gRPC server and serve it.
     """
     Path("reports").mkdir(exist_ok=True)
-
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=4))
     rpg2.add_ReportServiceServicer_to_server(ReportServicer(), server)
     server.add_insecure_port("0.0.0.0:50053")
