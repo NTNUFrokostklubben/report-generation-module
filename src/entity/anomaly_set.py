@@ -23,3 +23,4 @@ class AnomalySet:
     image_number: int
     tiff_coordinate: tuple[float, float]
     image_uri: Optional[str]
+    user_classification: Optional[str] = None
