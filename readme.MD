@@ -3,7 +3,6 @@
 Module for generating reports on anomalies detected in the SKAVL anomaly detection module.
 
 
-
 ## Running and Building
 
 Building this application is relatively platform-agnostic, but it requires that conda is installed and that [conda-lock](https://github.com/conda/conda-lock) is installed.
