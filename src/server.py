@@ -17,7 +17,7 @@ def serve():
         prog="skavl-anomaly-detection-module",
         description="Anomaly detection in aerial images")
 
-    parser.add_argument("-p", "--port", help="Port to start tiler server with", default=50051)
+    parser.add_argument("-p", "--port", help="Port to start tiler server with", default=50053)
     parser.add_argument("-l", "--local", action="store_true",
                         help="""Determines if all or only local connections should be accepted. 
                                    If this argument is present, the servers IP will be 127.0.0.1, 
