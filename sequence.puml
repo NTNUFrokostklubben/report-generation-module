@@ -1,0 +1,118 @@
+@startuml Report Generation Module
+
+  skinparam sequenceMessageAlign center
+  skinparam responseMessageBelowArrow true
+  skinparam backgroundColor #FAFAFA
+  skinparam participantBackgroundColor #E8F4FD
+  skinparam participantBorderColor #2980B9
+
+  title SKAVL Report Generation Module — Sequence Diagram
+
+  actor "External Service\n(gRPC Client)" as Client
+  participant "server.py\n:50053" as Server
+  participant "ReportServicer" as Servicer
+  participant "create_report_set()" as Parser
+  participant "ReportGenerator" as Generator
+  participant "io_tools" as IO
+  participant "Jinja2\nTemplate" as Template
+  participant "WeasyPrint" as Weasy
+  database "Local Filesystem\n(TIFF / PDF)" as FS
+
+  == Classified Report Request ==
+  Client -> Server : GenerateReportClassified(\n  ReportGenerationRequest)
+  activate Server
+
+  Server -> Servicer : GenerateReportClassified(request, context)
+  activate Servicer
+
+  Servicer -> Parser : create_report_set(request)
+  activate Parser
+  Parser -> Parser : parse ProjectMetaData\n(project_name, sosi_path,\nimage_folder, water_mask)
+  Parser -> Parser : parse AnomalySet list\n(image_name, confidence, type,\nline/image_no, coords,\nuser_classification)
+  Parser --> Servicer : ReportSet
+  deactivate Parser
+
+  Servicer -> Generator : create_report_classified(report_set)
+  activate Generator
+
+  loop for each AnomalySet image
+    Generator -> FS : read TIFF\n(image_folder_path/image_name.tif)
+    activate FS
+    FS --> IO : raw TIFF bytes
+    deactivate FS
+    activate IO
+    IO -> IO : read_tiff_fast(path, level=5)\n→ numpy array (H×W×3)
+    IO -> IO : image_to_uri()\n  PIL Image → rotate if portrait\n  → save PNG → file:// URI
+    IO --> Generator : image URI
+    deactivate IO
+    Generator -> Generator : store URI in AnomalySet.image_uri
+  end
+
+  Generator -> Generator : _group_by_category(report_set, translations)\n→ OrderedDict[category_label, list[AnomalySet]]
+
+  Generator -> Template : render("classified_report.html",\n  anomaly_groups, total_images,\n  threshold×100, meta, locale)
+  activate Template
+  Template -> Template : anomaly_section() macro\n2-column image grid per category
+  Template --> Generator : rendered HTML string
+  deactivate Template
+
+  Generator -> Weasy : HTML + classified_report.css → PDF
+  activate Weasy
+  Weasy -> FS : write PDF to /reports/
+  activate FS
+  FS --> Weasy : PDF file path
+  deactivate FS
+  Weasy --> Generator : absolute PDF path
+  deactivate Weasy
+
+  Generator --> Servicer : absolute PDF path
+  deactivate Generator
+
+  Servicer --> Server : ReportGenerationResponse\n(report_url = /reports/…pdf)
+  deactivate Servicer
+  Server --> Client : ReportGenerationResponse
+  deactivate Server
+
+  == Unclassified Report Request ==
+  Client -> Server : GenerateReportUnclassified(\n  ReportGenerationRequest)
+  activate Server
+
+  Server -> Servicer : GenerateReportUnclassified(request, context)
+  activate Servicer
+
+  Servicer -> Parser : create_report_set(request)
+  activate Parser
+  Parser --> Servicer : ReportSet
+  deactivate Parser
+
+  Servicer -> Generator : create_report_unclassified(report_set)
+  activate Generator
+
+  note over Generator : No TIFF loading —\nmetadata and confidence\nscores only
+
+  Generator -> Generator : _group_by_category(report_set, translations)\n→ OrderedDict[category_label, list[AnomalySet]]
+
+  Generator -> Template : render("unclassified_report.html",\n  anomaly_groups, total_images,\n  threshold×100, meta, locale)
+  activate Template
+  Template -> Template : anomaly_section() macro\nunordered list with\nconfidence scores per category
+  Template --> Generator : rendered HTML string
+  deactivate Template
+
+  Generator -> Weasy : HTML + unclassified_report.css → PDF
+  activate Weasy
+  Weasy -> FS : write PDF to /reports/
+  activate FS
+  FS --> Weasy : PDF file path
+  deactivate FS
+  Weasy --> Generator : absolute PDF path
+  deactivate Weasy
+
+  Generator --> Servicer : absolute PDF path
+  deactivate Generator
+
+  Servicer --> Server : ReportGenerationResponse\n(report_url = /reports/…pdf)
+  deactivate Servicer
+  Server --> Client : ReportGenerationResponse
+  deactivate Server
+
+  @enduml
