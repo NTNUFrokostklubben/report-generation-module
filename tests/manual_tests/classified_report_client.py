@@ -29,7 +29,7 @@ def run():
                 anomaly_type=anomaly_pb2.AnomalyTypes.ARTIFACT,
                 line_number=73,
                 image_number=14823,
-                user_classification="test2",
+
             )
         ],
         confidence_threshold=0.5,
