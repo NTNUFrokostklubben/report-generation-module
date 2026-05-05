@@ -28,7 +28,7 @@ def run():
             anomaly_pb2.AnomalySet(
                 image_name="HX-14365_073_002_14823",
                 anomaly_confidence=0.87,
-                anomaly_type=anomaly_pb2.AnomalyTypes.ARTIFACT,
+                anomaly_type=anomaly_pb2.AnomalyTypes.UNDEFINED,
                 line_number=73,
                 image_number=14823,
             )

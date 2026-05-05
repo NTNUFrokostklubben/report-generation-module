@@ -101,9 +101,11 @@ class ReportGenerator:
           belonging to that category.
         """
         known_order = [
-            (1, translations["block_artifact"]),
-            (2, translations["color_difference"]),
-            (3, translations["water_mask"]),
+
+            (0, translations["undefined"]),
+            (1, translations["color_difference"]),
+            (2, translations["water_mask"]),
+            (3, translations["block_artifact"]),
             (4, translations["line_artifact"]),
         ]
         groups = OrderedDict((label, []) for _, label in known_order)
