@@ -9,7 +9,6 @@ from l10n.l10n import classified_translations as t_classified, unclassified_tran
 from utils.io_tools import image_to_uri, read_tiff_fast
 from collections import OrderedDict
 from entity.report_generation_set import ReportSet
-from services.config_parser.config_parser import Config
 
 class ReportGenerator:
     _BASE_DIR = None
@@ -37,11 +36,10 @@ class ReportGenerator:
 
         css = CSS(str(self._TEMPLATE_DIR / "classified_report.css"))
         report_name = (report_set.project_meta_data.project_name.replace(" ", "_") + "_classified-report.pdf")
-        config = Config()
         with tempfile.TemporaryDirectory() as tmp_dir:
             for image in report_set.anomaly_images:
                 arr = read_tiff_fast(
-                    (Path(report_set.project_meta_data.image_folder_path) / image.image_name).with_suffix(config.get("report", "extension")),
+                    (Path(report_set.project_meta_data.image_folder_path) / image.image_name),
                     level=5)
                 image.image_uri = image_to_uri(arr, tmp_dir, image.image_name)
 
