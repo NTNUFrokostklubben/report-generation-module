@@ -56,10 +56,15 @@ class ReportGenerator:
                 ),
                 base_url=str(self._TEMPLATE_DIR)
             )
+            if report_set.save_location is None:
+                report_name = (report_set.project_meta_data.project_name.replace(" ", "_") + "_classified-report.pdf")
+                report_set.save_location = str(self._REPORT_DIR / report_name)
 
-            html.write_pdf(self._REPORT_DIR / report_name, stylesheets=[css])
+            Path(report_set.save_location).parent.mkdir(parents=True, exist_ok=True)
 
-        return str(self._REPORT_DIR / report_name)
+            html.write_pdf(report_set.save_location, stylesheets=[css])
+
+        return str(report_set.save_location)
 
 
 
@@ -82,10 +87,15 @@ class ReportGenerator:
             t=locale_t,
         ), base_url=str(self._TEMPLATE_DIR))
         css = CSS(str(self._TEMPLATE_DIR / "unclassified_report.css"))
-        report_name = (report_set.project_meta_data.project_name.replace(" ", "_") + "_unclassified-report.pdf")
-        html.write_pdf(self._REPORT_DIR / report_name, stylesheets=[css])
+        if report_set.save_location is None:
+            report_name = (report_set.project_meta_data.project_name.replace(" ", "_") + "_classified-report.pdf")
+            report_set.save_location = str(self._REPORT_DIR / report_name)
 
-        return str(self._REPORT_DIR / report_name)
+        Path(report_set.save_location).parent.mkdir(parents=True, exist_ok=True)
+
+        html.write_pdf(report_set.save_location, stylesheets=[css])
+
+        return str(report_set.save_location)
 
 
     def _group_by_category(self, report_set: ReportSet, translations: dict) -> dict:
