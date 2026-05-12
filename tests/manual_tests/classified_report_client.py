@@ -11,12 +11,12 @@ def run():
     request = report_pb2.ReportGenerationRequest(
         project_metadata=anomaly_pb2.ProjectMetadata(
             project_name="NORDMØRE 2025 HX-14365",
-            sosi_file_path="/data/nordmore.sos",
-            image_folder_path=os.path.abspath(r"C:\Users\name\Skule\2026-vaar\IDATA2901-bachelor-thesis\testing-images"),
+            sosi_file_path=os.path.abspath(r"C:\Users\Augus\Documents\Skule\bachelor\Flybildekontroll\HX-14365_Vertikalbilde.sos"),
+            image_folder_path=os.path.abspath(r"C:\Users\Augus\Documents\Skule\bachelor\testing-images"),
         ),
         anomaly_sets=[
             anomaly_pb2.AnomalySet(
-                image_name="HX-14365_073_001_14822",
+                image_name="HX-14365_073_001_14822.tif",
                 anomaly_confidence=0.87,
                 anomaly_type=anomaly_pb2.AnomalyTypes.COLOR_AVERAGE,
                 line_number=73,
@@ -24,7 +24,7 @@ def run():
                 user_classification="test",
             ),
             anomaly_pb2.AnomalySet(
-                image_name="HX-14365_073_002_14823",
+                image_name="HX-14365_073_002_14823.tif",
                 anomaly_confidence=0.87,
                 anomaly_type=anomaly_pb2.AnomalyTypes.ARTIFACT,
                 line_number=73,

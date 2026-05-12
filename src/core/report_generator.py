@@ -4,7 +4,6 @@ import tempfile
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 from weasyprint import HTML, CSS
-from entity.report_generation_set import ReportSet
 from l10n.l10n import classified_translations as t_classified, unclassified_translations as t_unclassified
 from utils.io_tools import image_to_uri, read_tiff_fast
 from collections import OrderedDict
