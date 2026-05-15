@@ -7,6 +7,8 @@ import skavl_proto.report_pb2_grpc as rpg2
 import time
 
 from services.report_service.report_servicer import ReportServicer
+from services.shutdown_servicer.shutdown_servicer import ShutdownServicer
+from skavl_proto import shutdown_pb2_grpc
 
 
 def serve():
@@ -28,6 +30,7 @@ def serve():
     Path("reports").mkdir(exist_ok=True)
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=4))
     rpg2.add_ReportServiceServicer_to_server(ReportServicer(), server)
+    shutdown_pb2_grpc.add_ShutdownServiceServicer_to_server(ShutdownServicer(server), server)
 
     # Accepts connections only locally when running locally.
     server_port = getattr(args, "port")
@@ -40,11 +43,7 @@ def serve():
 
     server.start()
     print(f"gRPC server listening on {server_ip}:{server_port}")
-    try:
-        while True:
-            time.sleep(3600)
-    except KeyboardInterrupt:
-        server.stop(0)
+    server.wait_for_termination()
 
 
 if __name__ == "__main__":
