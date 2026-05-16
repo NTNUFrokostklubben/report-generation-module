@@ -26,7 +26,7 @@
         <h3>{{t.project}}:{{meta.project_name}}</h3>
     </div>
     <p>{{t.num_images}}: {{total_images}} </p>
-    <p>{{t.confidence_threshold}}: {{threshold*100}}% </p>
+    <p>{{t.confidence_threshold}}: {{"%.2f"|format(threshold * 100) }}% </p>
     <hr/>
 </section>
 <section id="anomalies">
