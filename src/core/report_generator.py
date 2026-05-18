@@ -36,11 +36,10 @@ class ReportGenerator:
 
         css = CSS(str(self._TEMPLATE_DIR / "classified_report.css"))
         report_name = (report_set.project_meta_data.project_name.replace(" ", "_") + "_classified-report.pdf")
-
         with tempfile.TemporaryDirectory() as tmp_dir:
             for image in report_set.anomaly_images:
                 arr = read_tiff_fast(
-                    (Path(report_set.project_meta_data.image_folder_path) / image.image_name).with_suffix(".tif"),
+                    (Path(report_set.project_meta_data.image_folder_path) / image.image_name),
                     level=5)
                 image.image_uri = image_to_uri(arr, tmp_dir, image.image_name)
 
@@ -55,10 +54,15 @@ class ReportGenerator:
                 ),
                 base_url=str(self._TEMPLATE_DIR)
             )
+            if report_set.save_location is None:
+                report_name = (report_set.project_meta_data.project_name.replace(" ", "_") + "_classified-report.pdf")
+                report_set.save_location = str(self._REPORT_DIR / report_name)
 
-            html.write_pdf(self._REPORT_DIR / report_name, stylesheets=[css])
+            Path(report_set.save_location).parent.mkdir(parents=True, exist_ok=True)
 
-        return str(self._REPORT_DIR / report_name)
+            html.write_pdf(report_set.save_location, stylesheets=[css])
+
+        return str(report_set.save_location)
 
 
 
@@ -81,10 +85,15 @@ class ReportGenerator:
             t=locale_t,
         ), base_url=str(self._TEMPLATE_DIR))
         css = CSS(str(self._TEMPLATE_DIR / "unclassified_report.css"))
-        report_name = (report_set.project_meta_data.project_name.replace(" ", "_") + "_unclassified-report.pdf")
-        html.write_pdf(self._REPORT_DIR / report_name, stylesheets=[css])
+        if report_set.save_location is None:
+            report_name = (report_set.project_meta_data.project_name.replace(" ", "_") + "_classified-report.pdf")
+            report_set.save_location = str(self._REPORT_DIR / report_name)
 
-        return str(self._REPORT_DIR / report_name)
+        Path(report_set.save_location).parent.mkdir(parents=True, exist_ok=True)
+
+        html.write_pdf(report_set.save_location, stylesheets=[css])
+
+        return str(report_set.save_location)
 
 
     def _group_by_category(self, report_set: ReportSet, translations: dict) -> dict:
@@ -100,9 +109,11 @@ class ReportGenerator:
           belonging to that category.
         """
         known_order = [
-            (1, translations["block_artifact"]),
-            (2, translations["color_difference"]),
-            (3, translations["water_mask"]),
+
+            (0, translations["undefined"]),
+            (1, translations["color_difference"]),
+            (2, translations["water_mask"]),
+            (3, translations["block_artifact"]),
             (4, translations["line_artifact"]),
         ]
         groups = OrderedDict((label, []) for _, label in known_order)

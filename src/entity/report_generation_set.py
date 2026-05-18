@@ -13,3 +13,4 @@ class ReportSet:
     anomaly_images: list[AnomalySet]
     confidence_threshold: float
     locale:str
+    save_location:str

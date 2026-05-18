@@ -120,3 +120,15 @@ class GetProgressResponse(_message.Message):
     last_processed_image: int
     total_images: int
     def __init__(self, project_name: _Optional[str] = ..., last_processed_image: _Optional[int] = ..., total_images: _Optional[int] = ...) -> None: ...
+
+class StopAnalysisRequest(_message.Message):
+    __slots__ = ("project_name",)
+    PROJECT_NAME_FIELD_NUMBER: _ClassVar[int]
+    project_name: str
+    def __init__(self, project_name: _Optional[str] = ...) -> None: ...
+
+class StopAnalysisResponse(_message.Message):
+    __slots__ = ("acknowledged",)
+    ACKNOWLEDGED_FIELD_NUMBER: _ClassVar[int]
+    acknowledged: bool
+    def __init__(self, acknowledged: _Optional[bool] = ...) -> None: ...
